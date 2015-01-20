@@ -1,10 +1,10 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import fr.vergne.measure.PushReadable.ValueListener;
+import fr.vergne.access.PushReadable.ValueListener;
 
 public class ReactiveVariableTest {
 
@@ -24,18 +24,18 @@ public class ReactiveVariableTest {
 		variable.set(0);
 		assertEquals(0, (Object) variable.get());
 	}
-	
+
 	@Test
 	public void testSetNotifications() {
-		final boolean[] isRun = {false};
+		final boolean[] isRun = { false };
 		ValueListener<Integer> listener = new ValueListener<Integer>() {
-			
+
 			@Override
 			public void valueGenerated(Integer value) {
 				isRun[0] = true;
 			}
 		};
-		
+
 		ReactiveVariable<Integer> variable = new ReactiveVariable<Integer>();
 		variable.addValueListener(listener);
 
@@ -61,26 +61,26 @@ public class ReactiveVariableTest {
 
 		variable.removeValueListener(listener);
 		isRun[0] = false;
-		
+
 		variable.set(-10);
 		assertFalse(isRun[0]);
-		
+
 		variable.set(654132);
 		assertFalse(isRun[0]);
-		
+
 		variable.set(null);
 		assertFalse(isRun[0]);
-		
+
 		variable.set(65);
 		assertFalse(isRun[0]);
-		
+
 		variable.addValueListener(listener);
-		
+
 		isRun[0] = false;
 		assertFalse(isRun[0]);
 		variable.set(2);
 		assertTrue(isRun[0]);
-		
+
 		isRun[0] = false;
 		assertFalse(isRun[0]);
 		variable.set(98);

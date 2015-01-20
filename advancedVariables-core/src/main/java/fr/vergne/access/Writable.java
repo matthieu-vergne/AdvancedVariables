@@ -1,4 +1,4 @@
-package fr.vergne.measure;
+package fr.vergne.access;
 
 /**
  * A {@link Writable} entity is an entity which can be re-affected directly.

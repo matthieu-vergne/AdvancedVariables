@@ -1,4 +1,4 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
 import static org.junit.Assert.*;
 

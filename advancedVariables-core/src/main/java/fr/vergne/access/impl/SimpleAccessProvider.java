@@ -1,4 +1,4 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import fr.vergne.measure.AccessProvider;
-import fr.vergne.measure.Accessable;
-import fr.vergne.measure.PullReadable;
-import fr.vergne.measure.PushReadable;
-import fr.vergne.measure.Writable;
+import fr.vergne.access.AccessProvider;
+import fr.vergne.access.Accessable;
+import fr.vergne.access.PullReadable;
+import fr.vergne.access.PushReadable;
+import fr.vergne.access.Writable;
 
 /**
  * This {@link SimpleAccessProvider} allows to manage a set of IDs and their

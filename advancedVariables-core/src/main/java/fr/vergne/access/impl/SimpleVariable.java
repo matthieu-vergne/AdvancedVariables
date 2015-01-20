@@ -1,7 +1,7 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
-import fr.vergne.measure.PullReadable;
-import fr.vergne.measure.Writable;
+import fr.vergne.access.PullReadable;
+import fr.vergne.access.Writable;
 
 /**
  * A {@link SimpleVariable} is an entity which emulates a variable which can be

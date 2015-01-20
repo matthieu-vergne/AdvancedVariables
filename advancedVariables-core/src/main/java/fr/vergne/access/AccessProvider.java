@@ -1,8 +1,8 @@
-package fr.vergne.measure;
+package fr.vergne.access;
 
 import java.util.Collection;
 
-import fr.vergne.measure.impl.SimpleAccessProvider;
+import fr.vergne.access.impl.SimpleAccessProvider;
 
 /**
  * An {@link AccessProvider} manages accesses among one or several entities,

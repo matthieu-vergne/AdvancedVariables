@@ -1,4 +1,4 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import fr.vergne.measure.Accessable;
+import fr.vergne.access.Accessable;
 
 public class SimpleAccessProviderTest {
 
@@ -146,7 +146,7 @@ public class SimpleAccessProviderTest {
 		assertEquals(null, provider.getPushAccess(3));
 		assertEquals(access3, provider.getWriteAccess(3));
 	}
-	
+
 	@Test
 	public void testClear() {
 		Accessable access1 = new SimpleVariable<Integer>();

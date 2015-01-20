@@ -1,4 +1,4 @@
-package fr.vergne.measure;
+package fr.vergne.access;
 
 /**
  * A {@link PullReadable} entity is an entity for which we can get the value on

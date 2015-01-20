@@ -1,11 +1,11 @@
-package fr.vergne.measure.impl;
+package fr.vergne.access.impl;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-import fr.vergne.measure.PullReadable;
-import fr.vergne.measure.PushReadable;
-import fr.vergne.measure.Writable;
+import fr.vergne.access.PullReadable;
+import fr.vergne.access.PushReadable;
+import fr.vergne.access.Writable;
 
 /**
  * A {@link ReactiveVariable}, like {@link SimpleVariable}, emulates a variable

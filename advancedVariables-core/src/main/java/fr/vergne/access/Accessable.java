@@ -1,4 +1,4 @@
-package fr.vergne.measure;
+package fr.vergne.access;
 
 /**
  * This interface is the common root for all types of access interface. No one
