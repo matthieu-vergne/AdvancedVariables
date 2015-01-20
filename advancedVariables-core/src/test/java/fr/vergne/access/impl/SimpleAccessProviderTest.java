@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import fr.vergne.access.Accessable;
+import fr.vergne.access.Access;
 
 public class SimpleAccessProviderTest {
 
@@ -17,11 +17,11 @@ public class SimpleAccessProviderTest {
 
 		assertNull(provider.getPullAccess(1));
 
-		SimpleVariable<Integer> access1 = new SimpleVariable<Integer>();
+		ReadWriteProperty<Integer> access1 = new ReadWriteProperty<Integer>();
 		provider.setPullAccess(1, access1);
 		assertEquals(access1, provider.getPullAccess(1));
 
-		ReactiveVariable<Integer> access2 = new ReactiveVariable<Integer>();
+		ReactiveReadWriteProperty<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
 		provider.setPullAccess(1, access2);
 		assertEquals(access2, provider.getPullAccess(1));
 
@@ -35,11 +35,11 @@ public class SimpleAccessProviderTest {
 
 		assertNull(provider.getPushAccess(1));
 
-		ReactiveVariable<Integer> access1 = new ReactiveVariable<Integer>();
+		ReactiveReadWriteProperty<Integer> access1 = new ReactiveReadWriteProperty<Integer>();
 		provider.setPushAccess(1, access1);
 		assertEquals(access1, provider.getPushAccess(1));
 
-		ReactiveVariable<Integer> access2 = new ReactiveVariable<Integer>();
+		ReactiveReadWriteProperty<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
 		provider.setPushAccess(1, access2);
 		assertEquals(access2, provider.getPushAccess(1));
 
@@ -53,11 +53,11 @@ public class SimpleAccessProviderTest {
 
 		assertNull(provider.getWriteAccess(1));
 
-		SimpleVariable<Integer> access1 = new SimpleVariable<Integer>();
+		ReadWriteProperty<Integer> access1 = new ReadWriteProperty<Integer>();
 		provider.setWriteAccess(1, access1);
 		assertEquals(access1, provider.getWriteAccess(1));
 
-		ReactiveVariable<Integer> access2 = new ReactiveVariable<Integer>();
+		ReactiveReadWriteProperty<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
 		provider.setWriteAccess(1, access2);
 		assertEquals(access2, provider.getWriteAccess(1));
 
@@ -76,7 +76,7 @@ public class SimpleAccessProviderTest {
 		assertNull(provider.getPushAccess(2));
 		assertNull(provider.getWriteAccess(2));
 
-		SimpleVariable<Integer> access1 = new SimpleVariable<Integer>();
+		ReadWriteProperty<Integer> access1 = new ReadWriteProperty<Integer>();
 		provider.setMultiAccesses(1, access1);
 		assertEquals(access1, provider.getPullAccess(1));
 		assertEquals(null, provider.getPushAccess(1));
@@ -85,7 +85,7 @@ public class SimpleAccessProviderTest {
 		assertNull(provider.getPushAccess(2));
 		assertNull(provider.getWriteAccess(2));
 
-		ReactiveVariable<Integer> access2 = new ReactiveVariable<Integer>();
+		ReactiveReadWriteProperty<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
 		provider.setMultiAccesses(1, access2);
 		provider.setMultiAccesses(2, access1);
 		assertEquals(access2, provider.getPullAccess(1));
@@ -114,11 +114,11 @@ public class SimpleAccessProviderTest {
 
 	@Test
 	public void testSetRemoveAllAccesses() {
-		Accessable access1 = new SimpleVariable<Integer>();
-		Accessable access2 = new ReactiveVariable<Integer>();
-		Accessable access3 = new SimpleVariable<Integer>();
+		Access<Integer> access1 = new ReadWriteProperty<Integer>();
+		Access<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
+		Access<Integer> access3 = new ReadWriteProperty<Integer>();
 
-		Map<Object, Accessable> accesses = new HashMap<Object, Accessable>();
+		Map<Object, Access<Integer>> accesses = new HashMap<Object, Access<Integer>>();
 		accesses.put(1, access1);
 		accesses.put(2, access2);
 		accesses.put(3, access3);
@@ -149,11 +149,11 @@ public class SimpleAccessProviderTest {
 
 	@Test
 	public void testClear() {
-		Accessable access1 = new SimpleVariable<Integer>();
-		Accessable access2 = new ReactiveVariable<Integer>();
-		Accessable access3 = new SimpleVariable<Integer>();
+		Access<Integer> access1 = new ReadWriteProperty<Integer>();
+		Access<Integer> access2 = new ReactiveReadWriteProperty<Integer>();
+		Access<Integer> access3 = new ReadWriteProperty<Integer>();
 
-		Map<Object, Accessable> accesses = new HashMap<Object, Accessable>();
+		Map<Object, Access<Integer>> accesses = new HashMap<Object, Access<Integer>>();
 		accesses.put(1, access1);
 		accesses.put(2, access2);
 		accesses.put(3, access3);
@@ -185,11 +185,11 @@ public class SimpleAccessProviderTest {
 
 	@Test
 	public void testStartFull() {
-		Accessable access1 = new SimpleVariable<Integer>();
-		Accessable access2 = new SimpleVariable<Integer>();
-		Accessable access3 = new ReactiveVariable<Integer>();
+		Access<Integer> access1 = new ReadWriteProperty<Integer>();
+		Access<Integer> access2 = new ReadWriteProperty<Integer>();
+		Access<Integer> access3 = new ReactiveReadWriteProperty<Integer>();
 
-		Map<Object, Accessable> accesses = new HashMap<Object, Accessable>();
+		Map<Object, Access<?>> accesses = new HashMap<Object, Access<?>>();
 		accesses.put(1, access1);
 		accesses.put(2, access2);
 		accesses.put(3, access3);
