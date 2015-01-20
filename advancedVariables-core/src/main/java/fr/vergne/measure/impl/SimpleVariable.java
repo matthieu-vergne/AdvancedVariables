@@ -1,11 +1,11 @@
 package fr.vergne.measure.impl;
 
 import fr.vergne.measure.PullReadable;
-import fr.vergne.measure.Settable;
+import fr.vergne.measure.Writable;
 
 /**
- * A {@link SimpleVariable} is an entity which emulates a variable which
- * can be read and written. Thus it only implements the {@link Settable} and
+ * A {@link SimpleVariable} is an entity which emulates a variable which can be
+ * read and written. Thus it only implements the {@link Writable} and
  * {@link PullReadable} interfaces and uses a single variable to store the value
  * provided through {@link #set(Object)}.
  * 
@@ -13,7 +13,7 @@ import fr.vergne.measure.Settable;
  * 
  * @param <T>
  */
-public class SimpleVariable<T> implements Settable<T>, PullReadable<T> {
+public class SimpleVariable<T> implements Writable<T>, PullReadable<T> {
 
 	private T value;
 

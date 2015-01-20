@@ -11,7 +11,7 @@ package fr.vergne.measure;
  * @param <T>
  * @see PushReadable
  */
-public interface PullReadable<T> {
+public interface PullReadable<T> extends Accessable {
 	/**
 	 * 
 	 * @return the current value of the entity

@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 import fr.vergne.measure.PullReadable;
 import fr.vergne.measure.PushReadable;
-import fr.vergne.measure.Settable;
+import fr.vergne.measure.Writable;
 
 /**
  * A {@link ReactiveVariable}, like {@link SimpleVariable}, emulates a variable
@@ -18,7 +18,7 @@ import fr.vergne.measure.Settable;
  * 
  * @param <T>
  */
-public class ReactiveVariable<T> implements Settable<T>, PullReadable<T>,
+public class ReactiveVariable<T> implements Writable<T>, PullReadable<T>,
 		PushReadable<T> {
 
 	private T value;
