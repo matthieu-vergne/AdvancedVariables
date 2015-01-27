@@ -1,28 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.matthieu-vergne</groupId>
-	<artifactId>advancedVariables</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<artifactId>data</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Advanced Variable Management Utilities</name>
-	<description>Different interfaces and implementations to manage advanced interactions with variables.</description>
+	<name>Advanced Data Management Utilities</name>
+	<description>Different interfaces and implementations to manage data in an advanced way.</description>
 	<inceptionYear>2015</inceptionYear>
-	<url>https://github.com/matthieu-vergne/advancedVariables</url>
+	<url>https://github.com/matthieu-vergne/Data-Management</url>
 	
 	<modules>
-		<module>advancedVariables-core</module>
-		<module>advancedVariables-samples</module>
+		<module>data-access</module>
+		<module>data-samples</module>
 	</modules>
 
 	<scm>
-		<connection>scm:git:git://github.com/matthieu-vergne/AdvancedVariables.git</connection>
-		<developerConnection>scm:git:git://github.com/matthieu-vergne/AdvancedVariables.git</developerConnection>
-		<url>scm:git:git://github.com/matthieu-vergne/AdvancedVariables.git</url>
+		<connection>scm:git:git://github.com/matthieu-vergne/Data-Management.git</connection>
+		<developerConnection>scm:git:git://github.com/matthieu-vergne/Data-Management.git</developerConnection>
+		<url>scm:git:git://github.com/matthieu-vergne/Data-Management.git</url>
 	</scm>
 	
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/matthieu-vergne/AdvancedVariables/issues/</url>
+		<url>https://github.com/matthieu-vergne/Data-Management/issues/</url>
 	</issueManagement>
 	
 	<licenses>
