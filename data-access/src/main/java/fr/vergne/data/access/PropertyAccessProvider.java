@@ -25,6 +25,7 @@ import fr.vergne.data.access.impl.SimpleAccessProvider;
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
  */
+// TODO rename ID to key
 public interface PropertyAccessProvider {
 
 	/**
