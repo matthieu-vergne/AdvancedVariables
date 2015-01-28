@@ -14,6 +14,7 @@ It is managed through Maven and is available on the [central repository](http://
 	<version>1.0</version>
 </dependency>
 ```
+Please look at the available releases to know the last version.
 
 ## Who should be interested in this library?
 
