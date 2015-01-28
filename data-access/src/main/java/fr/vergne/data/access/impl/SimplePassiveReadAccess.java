@@ -38,4 +38,15 @@ public class SimplePassiveReadAccess<Value> implements PassiveReadAccess<Value> 
 		listeners.remove(listener);
 	}
 
+	/**
+	 * Notify all the listeners about the value given in argument.
+	 * 
+	 * @param value
+	 *            the value to send to the listeners
+	 */
+	public void notifyListeners(Value value) {
+		for (ValueListener<Value> listener : listeners) {
+			listener.valueGenerated(value);
+		}
+	}
 }
