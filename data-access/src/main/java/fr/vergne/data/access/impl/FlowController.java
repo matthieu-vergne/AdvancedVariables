@@ -18,11 +18,10 @@ import fr.vergne.data.access.PassiveWriteAccess;
  * 
  * @param <Value>
  */
-public class FlowController<Value> implements PassiveWriteAccess<Value>,
+public class FlowController<Value> extends SimplePassiveWriteAccess<Value> implements PassiveWriteAccess<Value>,
 		PassiveReadAccess<Value> {
 
 	private final Collection<ValueListener<Value>> listeners = new HashSet<ValueListener<Value>>();
-	private ValueGenerator<Value> generator;
 
 	/**
 	 * Create a {@link FlowController} without any {@link ValueGenerator}. Such
@@ -32,6 +31,7 @@ public class FlowController<Value> implements PassiveWriteAccess<Value>,
 	 * {@link #transfer()}.
 	 */
 	public FlowController() {
+		super(null);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class FlowController<Value> implements PassiveWriteAccess<Value>,
 	 *            transfer to the {@link ValueListener}s
 	 */
 	public FlowController(ValueGenerator<Value> generator) {
-		setValueGenerator(generator);
+		super(generator);
 	}
 
 	@Override
@@ -61,16 +61,6 @@ public class FlowController<Value> implements PassiveWriteAccess<Value>,
 		listeners.remove(listener);
 	}
 
-	@Override
-	public void setValueGenerator(ValueGenerator<Value> generator) {
-		this.generator = generator;
-	}
-
-	@Override
-	public ValueGenerator<Value> getValueGenerator() {
-		return generator;
-	}
-
 	/**
 	 * Retrieve the value from the {@link ValueGenerator} and transfer it to the
 	 * registered {@link ValueListener}s. If no {@link ValueListener} is
@@ -80,7 +70,7 @@ public class FlowController<Value> implements PassiveWriteAccess<Value>,
 		if (listeners.isEmpty()) {
 			// no need to retrieve the value
 		} else {
-			Value value = generator.generateValue();
+			Value value = getValueGenerator().generateValue();
 			for (ValueListener<Value> listener : listeners) {
 				listener.valueGenerated(value);
 			}
