@@ -23,11 +23,7 @@ public class SimplePassiveWriteAccess<Value> implements
 
 	@Override
 	public void setValueGenerator(ValueGenerator<Value> generator) {
-		if (generator == null) {
-			throw new NullPointerException("No generator provided");
-		} else {
-			this.generator = generator;
-		}
+		this.generator = generator;
 	}
 
 	@Override

@@ -35,28 +35,4 @@ public class SimplePassiveWriteAccessTest {
 		assertEquals(generator1, access.getValueGenerator());
 	}
 
-	@Test
-	public void testSetNullGeneratorException() {
-		try {
-			new SimplePassiveWriteAccess<Integer>(null);
-			fail("No exception thrown");
-		} catch (NullPointerException e) {
-		}
-
-		ValueGenerator<Integer> generator = new ValueGenerator<Integer>() {
-
-			@Override
-			public Integer generateValue() {
-				return null;
-			}
-		};
-		SimplePassiveWriteAccess<Integer> access = new SimplePassiveWriteAccess<Integer>(
-				generator);
-		try {
-			access.setValueGenerator(null);
-			fail("No exception thrown");
-		} catch (NullPointerException e) {
-		}
-	}
-
 }
