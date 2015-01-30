@@ -55,7 +55,7 @@ public class SimplePassiveReadAccessTest {
 		assertFalse(access.getValueListeners().contains(listener1));
 		assertFalse(access.getValueListeners().contains(listener2));
 	}
-	
+
 	@Test
 	public void testNotifyListeners() {
 		final Integer[] container = new Integer[3];
@@ -81,21 +81,21 @@ public class SimplePassiveReadAccessTest {
 				container[2] = value;
 			}
 		});
-		
+
 		container[0] = null;
 		container[1] = null;
 		container[2] = null;
-		
+
 		access.notifyValueListeners(3);
 		assertEquals(3, (Object) container[0]);
 		assertEquals(3, (Object) container[1]);
 		assertEquals(3, (Object) container[2]);
-		
+
 		access.notifyValueListeners(-45);
 		assertEquals(-45, (Object) container[0]);
 		assertEquals(-45, (Object) container[1]);
 		assertEquals(-45, (Object) container[2]);
-		
+
 		access.notifyValueListeners(null);
 		assertEquals(null, (Object) container[0]);
 		assertEquals(null, (Object) container[1]);
