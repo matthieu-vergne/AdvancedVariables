@@ -1,4 +1,4 @@
-package fr.vergne.data.access.impl;
+package fr.vergne.data.access.impl.advanced;
 
 import static org.junit.Assert.*;
 

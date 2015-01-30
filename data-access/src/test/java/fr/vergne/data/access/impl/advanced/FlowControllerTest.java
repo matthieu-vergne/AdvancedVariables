@@ -1,4 +1,4 @@
-package fr.vergne.data.access.impl;
+package fr.vergne.data.access.impl.advanced;
 
 import static org.junit.Assert.*;
 
@@ -7,12 +7,12 @@ import org.junit.Test;
 import fr.vergne.data.access.PassiveReadAccess.ValueListener;
 import fr.vergne.data.access.PassiveWriteAccess.ValueGenerator;
 
-public class ReadableFlowControllerTest {
+public class FlowControllerTest {
 
 	@Test
-	public void testGet() {
+	public void testTransfer() {
 		final Integer[] source = { 1 };
-		ReadableFlowController<Integer> controller = new ReadableFlowController<Integer>(
+		FlowController<Integer> controller = new FlowController<Integer>(
 				new ValueGenerator<Integer>() {
 
 					@Override
@@ -29,14 +29,13 @@ public class ReadableFlowControllerTest {
 			}
 		});
 
-		assertEquals(null, controller.get());
+		assertFalse(source[0] == target[0]);
 		controller.transfer();
-		assertEquals(source[0], controller.get());
-		Integer old = source[0];
+		assertTrue(source[0] == target[0]);
 		source[0] = 58;
-		assertEquals(old, controller.get());
+		assertFalse(source[0] == target[0]);
 		controller.transfer();
-		assertEquals(source[0], controller.get());
+		assertTrue(source[0] == target[0]);
 	}
 
 }

@@ -1,8 +1,8 @@
 package fr.vergne.data.access;
 
-import fr.vergne.data.access.impl.ControlledProperty;
-import fr.vergne.data.access.impl.FlowController;
 import fr.vergne.data.access.impl.SimpleAccessProvider;
+import fr.vergne.data.access.impl.advanced.ControlledProperty;
+import fr.vergne.data.access.impl.advanced.FlowController;
 
 /**
  * {@link PropertyAccess} is the root interface of all the access interfaces.

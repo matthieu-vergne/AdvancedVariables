@@ -10,10 +10,10 @@ import fr.vergne.data.access.PassiveReadAccess;
 import fr.vergne.data.access.PassiveReadAccess.ValueListener;
 import fr.vergne.data.access.PassiveWriteAccess;
 import fr.vergne.data.access.PassiveWriteAccess.ValueGenerator;
-import fr.vergne.data.access.impl.ReactiveControlledProperty;
-import fr.vergne.data.access.impl.ReadableFlowController;
 import fr.vergne.data.access.impl.SimplePassiveReadAccess;
 import fr.vergne.data.access.impl.SimplePassiveWriteAccess;
+import fr.vergne.data.access.impl.advanced.ReactiveControlledProperty;
+import fr.vergne.data.access.impl.advanced.ReadableFlowController;
 
 public class AccessFactoryTest {
 

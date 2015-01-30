@@ -9,6 +9,9 @@ import org.junit.Test;
 
 import fr.vergne.data.access.PassiveWriteAccess;
 import fr.vergne.data.access.PropertyAccess;
+import fr.vergne.data.access.impl.advanced.ControlledProperty;
+import fr.vergne.data.access.impl.advanced.FlowController;
+import fr.vergne.data.access.impl.advanced.ReactiveControlledProperty;
 
 public class SimpleAccessProviderTest {
 
