@@ -52,7 +52,7 @@ public class FlowController<Value> extends SimplePassiveWriteAccess<Value> imple
 	}
 	
 	@Override
-	public Collection<fr.vergne.data.access.PassiveReadAccess.ValueListener<Value>> getValueListeners() {
+	public Collection<ValueListener<Value>> getValueListeners() {
 		return readers;
 	}
 
