@@ -150,14 +150,14 @@ public class SimpleAccessProviderTest {
 
 		SimpleAccessProvider provider = new SimpleAccessProvider();
 
-		assertTrue(provider.getIDs().isEmpty());
+		assertTrue(provider.getKeys().isEmpty());
 
 		provider.setAllAccesses(accesses);
 
-		assertEquals(3, provider.getIDs().size());
-		assertTrue(provider.getIDs().contains(1));
-		assertTrue(provider.getIDs().contains(2));
-		assertTrue(provider.getIDs().contains(3));
+		assertEquals(3, provider.getKeys().size());
+		assertTrue(provider.getKeys().contains(1));
+		assertTrue(provider.getKeys().contains(2));
+		assertTrue(provider.getKeys().contains(3));
 
 		assertEquals(access1, provider.getActiveReadAccess(1));
 		assertEquals(null, provider.getPassiveReadAccess(1));
@@ -187,7 +187,7 @@ public class SimpleAccessProviderTest {
 		provider.setAllAccesses(accesses);
 		provider.clear();
 
-		assertTrue(provider.getIDs().isEmpty());
+		assertTrue(provider.getKeys().isEmpty());
 
 		assertNull(provider.getActiveReadAccess(1));
 		assertNull(provider.getPassiveReadAccess(1));
@@ -205,7 +205,7 @@ public class SimpleAccessProviderTest {
 	@Test
 	public void testStartEmpty() {
 		SimpleAccessProvider provider = new SimpleAccessProvider();
-		assertTrue(provider.getIDs().isEmpty());
+		assertTrue(provider.getKeys().isEmpty());
 	}
 
 	@Test
@@ -224,16 +224,16 @@ public class SimpleAccessProviderTest {
 
 		SimpleAccessProvider provider = new SimpleAccessProvider(accesses);
 
-		assertEquals(providerRef.getIDs().size(), provider.getIDs().size());
-		assertTrue(providerRef.getIDs().containsAll(provider.getIDs()));
-		assertTrue(provider.getIDs().containsAll(providerRef.getIDs()));
-		for (Object id : provider.getIDs()) {
-			assertEquals(providerRef.getActiveReadAccess(id),
-					provider.getActiveReadAccess(id));
-			assertEquals(providerRef.getPassiveReadAccess(id),
-					provider.getPassiveReadAccess(id));
-			assertEquals(providerRef.getActiveWriteAccess(id),
-					provider.getActiveWriteAccess(id));
+		assertEquals(providerRef.getKeys().size(), provider.getKeys().size());
+		assertTrue(providerRef.getKeys().containsAll(provider.getKeys()));
+		assertTrue(provider.getKeys().containsAll(providerRef.getKeys()));
+		for (Object key : provider.getKeys()) {
+			assertEquals(providerRef.getActiveReadAccess(key),
+					provider.getActiveReadAccess(key));
+			assertEquals(providerRef.getPassiveReadAccess(key),
+					provider.getPassiveReadAccess(key));
+			assertEquals(providerRef.getActiveWriteAccess(key),
+					provider.getActiveWriteAccess(key));
 		}
 	}
 }

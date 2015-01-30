@@ -24,7 +24,7 @@ import fr.vergne.data.access.PropertyAccessProvider;
  * {@link PropertyAccessProvider} implements the corresponding setX and removeX
  * methods to add and remove the corresponding {@link PropertyAccess}es. It is
  * also possible to add {@link PropertyAccess}es for any new property, simply by
- * choosing a different ID.<br/>
+ * choosing a different key.<br/>
  * <br/>
  * <h5>Multiple {@link PropertyAccess}es for single property:</h5> <br/>
  * If a single instance implements several {@link PropertyAccess} interfaces,
@@ -32,7 +32,7 @@ import fr.vergne.data.access.PropertyAccessProvider;
  * implementations end their extensions, the method
  * {@link #setMultiAccesses(Object, PropertyAccess)} can be used to add all of
  * them at once. Similarly, the method {@link #removeMultiAccesses(Object)}
- * allows to remove all the {@link PropertyAccess}es associated to a given ID,
+ * allows to remove all the {@link PropertyAccess}es associated to a given key,
  * independently on how they have been added.<br/>
  * <br/>
  * <h5>Multiple {@link PropertyAccess}es on multiple properties:</h5> <br/>
@@ -50,7 +50,7 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	private final Map<Object, ActiveWriteAccess<?>> activeWriters = new HashMap<Object, ActiveWriteAccess<?>>();
 	private final Map<Object, PassiveReadAccess<?>> passiveReaders = new HashMap<Object, PassiveReadAccess<?>>();
 	private final Map<Object, PassiveWriteAccess<?>> passiveWriters = new HashMap<Object, PassiveWriteAccess<?>>();
-	private final Collection<Object> ids = new HashSet<Object>();
+	private final Collection<Object> keys = new HashSet<Object>();
 
 	/**
 	 * Create an empty {@link SimpleAccessProvider}.
@@ -86,22 +86,33 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	 *            the {@link PropertyAccessProvider} to copy
 	 */
 	public SimpleAccessProvider(PropertyAccessProvider provider) {
-		for (Object id : provider.getIDs()) {
-			setActiveReadAccess(id, provider.getActiveReadAccess(id));
-			setPassiveReadAccess(id, provider.getPassiveReadAccess(id));
-			setActiveWriteAccess(id, provider.getActiveWriteAccess(id));
-			setPassiveWriteAccess(id, provider.getPassiveWriteAccess(id));
+		for (Object key : provider.getKeys()) {
+			setActiveReadAccess(key, provider.getActiveReadAccess(key));
+			setPassiveReadAccess(key, provider.getPassiveReadAccess(key));
+			setActiveWriteAccess(key, provider.getActiveWriteAccess(key));
+			setPassiveWriteAccess(key, provider.getPassiveWriteAccess(key));
 		}
 	}
 
 	/**
-	 * Return all the IDs having at least one {@link PropertyAccess} instance
+	 * Return all the keys having at least one {@link PropertyAccess} instance
 	 * set up. Please, use the corresponding getX methods to know which
-	 * {@link PropertyAccess}es are available for a given ID.
+	 * {@link PropertyAccess}es are available for a given key.
 	 */
 	@Override
+	public Collection<Object> getKeys() {
+		return keys;
+	}
+
+	/**
+	 * @deprecated Prefer to use {@link #getKeys()}. Will be deleted in future
+	 *             versions.
+	 */
+	@SuppressWarnings("deprecation")
+	@Deprecated
+	@Override
 	public Collection<Object> getIDs() {
-		return ids;
+		return getKeys();
 	}
 
 	/**
@@ -109,207 +120,207 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	 * If the property is unknown, it is added, otherwise only the
 	 * {@link PropertyAccess} is changed to the new one.
 	 * 
-	 * @param id
-	 *            the ID of a property
+	 * @param key
+	 *            the key of a property
 	 * @param access
 	 *            the {@link ActiveReadAccess} to this property
 	 */
-	public void setActiveReadAccess(Object id, ActiveReadAccess<?> access) {
-		activeReaders.put(id, access);
-		ids.add(id);
+	public void setActiveReadAccess(Object key, ActiveReadAccess<?> access) {
+		activeReaders.put(key, access);
+		keys.add(key);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> ActiveReadAccess<T> getActiveReadAccess(Object id) {
-		return (ActiveReadAccess<T>) activeReaders.get(id);
+	public <T> ActiveReadAccess<T> getActiveReadAccess(Object key) {
+		return (ActiveReadAccess<T>) activeReaders.get(key);
 	}
 
 	/**
 	 * This method removes any {@link ActiveReadAccess} assigned to a given
-	 * property. If the ID is unknown, it has no effect, otherwise the
-	 * {@link PropertyAccess} is removed and, if the ID has no other
+	 * property. If the key is unknown, it has no effect, otherwise the
+	 * {@link PropertyAccess} is removed and, if the key has no other
 	 * {@link PropertyAccess}, it is forgotten.
 	 * 
-	 * @param id
-	 *            the ID of the property to remove the {@link ActiveReadAccess}
+	 * @param key
+	 *            the key of the property to remove the {@link ActiveReadAccess}
 	 *            from
 	 */
-	public void removeActiveReadAccess(Object id) {
-		activeReaders.remove(id);
-		if (passiveReaders.containsKey(id) || activeWriters.containsKey(id)
-				|| passiveWriters.containsKey(id)) {
-			// ID still used
+	public void removeActiveReadAccess(Object key) {
+		activeReaders.remove(key);
+		if (passiveReaders.containsKey(key) || activeWriters.containsKey(key)
+				|| passiveWriters.containsKey(key)) {
+			// key still used
 		} else {
-			ids.remove(id);
+			keys.remove(key);
 		}
 	}
 
 	/**
 	 * This method assign a given {@link PassiveReadAccess} to a given property.
-	 * If the ID is unknown, it is added, otherwise only the
+	 * If the key is unknown, it is added, otherwise only the
 	 * {@link PropertyAccess} is changed to the new one.
 	 * 
-	 * @param id
-	 *            the ID of a property
+	 * @param key
+	 *            the key of a property
 	 * @param access
 	 *            the {@link PassiveReadAccess} to this property
 	 */
-	public void setPassiveReadAccess(Object id, PassiveReadAccess<?> access) {
-		passiveReaders.put(id, access);
-		ids.add(id);
+	public void setPassiveReadAccess(Object key, PassiveReadAccess<?> access) {
+		passiveReaders.put(key, access);
+		keys.add(key);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> PassiveReadAccess<T> getPassiveReadAccess(Object id) {
-		return (PassiveReadAccess<T>) passiveReaders.get(id);
+	public <T> PassiveReadAccess<T> getPassiveReadAccess(Object key) {
+		return (PassiveReadAccess<T>) passiveReaders.get(key);
 	}
 
 	/**
 	 * This method removes any {@link PassiveReadAccess} assigned to a given
-	 * property. If the ID is unknown, it has no effect, otherwise the
-	 * {@link PropertyAccess} is removed and, if the ID has no other
+	 * property. If the key is unknown, it has no effect, otherwise the
+	 * {@link PropertyAccess} is removed and, if the key has no other
 	 * {@link PropertyAccess}, it is forgotten.
 	 * 
-	 * @param id
-	 *            the ID of the property to remove the {@link PassiveReadAccess}
-	 *            from
+	 * @param key
+	 *            the key of the property to remove the
+	 *            {@link PassiveReadAccess} from
 	 */
-	public void removePassiveReadAccess(Object id) {
-		passiveReaders.remove(id);
-		if (activeReaders.containsKey(id) || activeWriters.containsKey(id)
-				|| passiveWriters.containsKey(id)) {
-			// ID still used
+	public void removePassiveReadAccess(Object key) {
+		passiveReaders.remove(key);
+		if (activeReaders.containsKey(key) || activeWriters.containsKey(key)
+				|| passiveWriters.containsKey(key)) {
+			// key still used
 		} else {
-			ids.remove(id);
+			keys.remove(key);
 		}
 	}
 
 	/**
 	 * This method assign a given {@link ActiveWriteAccess} to a given property.
-	 * If the ID is unknown, it is added, otherwise the only
+	 * If the key is unknown, it is added, otherwise the only
 	 * {@link PropertyAccess} is changed to the new one.
 	 * 
-	 * @param id
-	 *            the ID of a property
+	 * @param key
+	 *            the key of a property
 	 * @param access
 	 *            the {@link ActiveWriteAccess} to this property
 	 */
-	public void setActiveWriteAccess(Object id, ActiveWriteAccess<?> access) {
-		activeWriters.put(id, access);
-		ids.add(id);
+	public void setActiveWriteAccess(Object key, ActiveWriteAccess<?> access) {
+		activeWriters.put(key, access);
+		keys.add(key);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> ActiveWriteAccess<T> getActiveWriteAccess(Object id) {
-		return (ActiveWriteAccess<T>) activeWriters.get(id);
+	public <T> ActiveWriteAccess<T> getActiveWriteAccess(Object key) {
+		return (ActiveWriteAccess<T>) activeWriters.get(key);
 	}
 
 	/**
 	 * This method removes any {@link ActiveWriteAccess} assigned to a given
-	 * property. If the ID is unknown, it has no effect, otherwise the
-	 * {@link PropertyAccess} is removed and, if the ID has no other
+	 * property. If the key is unknown, it has no effect, otherwise the
+	 * {@link PropertyAccess} is removed and, if the key has no other
 	 * {@link PropertyAccess}, it is forgotten.
 	 * 
-	 * @param id
-	 *            the ID of the property to remove the {@link ActiveWriteAccess}
-	 *            from
+	 * @param key
+	 *            the key of the property to remove the
+	 *            {@link ActiveWriteAccess} from
 	 */
-	public void removeActiveWriteAccess(Object id) {
-		activeWriters.remove(id);
-		if (activeReaders.containsKey(id) || passiveReaders.containsKey(id)
-				|| passiveWriters.containsKey(id)) {
-			// ID still used
+	public void removeActiveWriteAccess(Object key) {
+		activeWriters.remove(key);
+		if (activeReaders.containsKey(key) || passiveReaders.containsKey(key)
+				|| passiveWriters.containsKey(key)) {
+			// key still used
 		} else {
-			ids.remove(id);
+			keys.remove(key);
 		}
 	}
 
 	/**
 	 * This method assign a given {@link PassiveWriteAccess} to a given
-	 * property. If the ID is unknown, it is added, otherwise the only
+	 * property. If the key is unknown, it is added, otherwise the only
 	 * {@link PropertyAccess} is changed to the new one.
 	 * 
-	 * @param id
-	 *            the ID of a property
+	 * @param key
+	 *            the key of a property
 	 * @param access
 	 *            the {@link PassiveWriteAccess} to this property
 	 */
-	public void setPassiveWriteAccess(Object id, PassiveWriteAccess<?> access) {
-		passiveWriters.put(id, access);
-		ids.add(id);
+	public void setPassiveWriteAccess(Object key, PassiveWriteAccess<?> access) {
+		passiveWriters.put(key, access);
+		keys.add(key);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> PassiveWriteAccess<T> getPassiveWriteAccess(Object id) {
-		return (PassiveWriteAccess<T>) passiveWriters.get(id);
+	public <T> PassiveWriteAccess<T> getPassiveWriteAccess(Object key) {
+		return (PassiveWriteAccess<T>) passiveWriters.get(key);
 	}
 
 	/**
 	 * This method removes any {@link PassiveWriteAccess} assigned to a given
-	 * property. If the ID is unknown, it has no effect, otherwise the
-	 * {@link PropertyAccess} is removed and, if the ID has no other
+	 * property. If the key is unknown, it has no effect, otherwise the
+	 * {@link PropertyAccess} is removed and, if the key has no other
 	 * {@link PropertyAccess}, it is forgotten.
 	 * 
-	 * @param id
-	 *            the ID of the property to remove the
+	 * @param key
+	 *            the key of the property to remove the
 	 *            {@link PassiveWriteAccess} from
 	 */
-	public void removePassiveWriteAccess(Object id) {
-		passiveWriters.remove(id);
-		if (activeReaders.containsKey(id) || passiveReaders.containsKey(id)
-				|| activeWriters.containsKey(id)) {
-			// ID still used
+	public void removePassiveWriteAccess(Object key) {
+		passiveWriters.remove(key);
+		if (activeReaders.containsKey(key) || passiveReaders.containsKey(key)
+				|| activeWriters.containsKey(key)) {
+			// key still used
 		} else {
-			ids.remove(id);
+			keys.remove(key);
 		}
 	}
 
 	/**
 	 * This method assign all the available {@link PropertyAccess}es to a given
-	 * property based on the implemented interfaces. If the ID is unknown, it is
-	 * added, otherwise only the {@link PropertyAccess}es are changed to the new
-	 * ones.
+	 * property based on the implemented interfaces. If the key is unknown, it
+	 * is added, otherwise only the {@link PropertyAccess}es are changed to the
+	 * new ones.
 	 * 
-	 * @param id
-	 *            the ID of a property
+	 * @param key
+	 *            the key of a property
 	 * @param access
 	 *            the instance implementing the {@link PropertyAccess}
 	 *            interfaces
 	 */
-	public void setMultiAccesses(Object id, PropertyAccess<?> access) {
+	public void setMultiAccesses(Object key, PropertyAccess<?> access) {
 		if (access instanceof ActiveReadAccess<?>) {
-			setActiveReadAccess(id, (ActiveReadAccess<?>) access);
+			setActiveReadAccess(key, (ActiveReadAccess<?>) access);
 		}
 		if (access instanceof PassiveReadAccess<?>) {
-			setPassiveReadAccess(id, (PassiveReadAccess<?>) access);
+			setPassiveReadAccess(key, (PassiveReadAccess<?>) access);
 		}
 		if (access instanceof ActiveWriteAccess<?>) {
-			setActiveWriteAccess(id, (ActiveWriteAccess<?>) access);
+			setActiveWriteAccess(key, (ActiveWriteAccess<?>) access);
 		}
 		if (access instanceof PassiveWriteAccess<?>) {
-			setPassiveWriteAccess(id, (PassiveWriteAccess<?>) access);
+			setPassiveWriteAccess(key, (PassiveWriteAccess<?>) access);
 		}
 	}
 
 	/**
 	 * This method removes all the {@link PropertyAccess}es assigned to a given
-	 * property. If the ID is unknown, it has no effect, otherwise the
-	 * {@link PropertyAccess}es are removed and the ID is forgotten.
+	 * property. If the key is unknown, it has no effect, otherwise the
+	 * {@link PropertyAccess}es are removed and the key is forgotten.
 	 * 
-	 * @param id
-	 *            the ID of the property to remove the {@link PropertyAccess}es
+	 * @param key
+	 *            the key of the property to remove the {@link PropertyAccess}es
 	 *            from
 	 */
-	public void removeMultiAccesses(Object id) {
-		activeReaders.remove(id);
-		passiveReaders.remove(id);
-		activeWriters.remove(id);
-		passiveWriters.remove(id);
-		ids.remove(id);
+	public void removeMultiAccesses(Object key) {
+		activeReaders.remove(key);
+		passiveReaders.remove(key);
+		activeWriters.remove(key);
+		passiveWriters.remove(key);
+		keys.remove(key);
 	}
 
 	/**
@@ -318,7 +329,7 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	 * 
 	 * @param accesses
 	 *            the map telling which {@link PropertyAccess}es to assign to
-	 *            which IDs
+	 *            which keys
 	 */
 	public void setAllAccesses(Map<Object, ? extends PropertyAccess<?>> accesses) {
 		for (Entry<Object, ? extends PropertyAccess<?>> entry : accesses
@@ -331,19 +342,19 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	 * This method is equivalent to using {@link #removeMultiAccesses(Object)}
 	 * on several properties.
 	 * 
-	 * @param ids
-	 *            the IDs of the {@link PropertyAccess}es to remove
+	 * @param keys
+	 *            the keys of the {@link PropertyAccess}es to remove
 	 */
-	public void removeAllAccesses(Collection<Object> ids) {
-		for (Object id : ids) {
-			removeMultiAccesses(id);
+	public void removeAllAccesses(Collection<Object> keys) {
+		for (Object key : keys) {
+			removeMultiAccesses(key);
 		}
 	}
 
 	/**
 	 * This method is equivalent to using {@link #removeAllAccesses(Collection)}
-	 * on all the IDs currently managed. No more ID should be returned by
-	 * {@link #getIDs()} and only <code>null</code> values should be returned
+	 * on all the keys currently managed. No more key should be returned by
+	 * {@link #getKeys()} and only <code>null</code> values should be returned
 	 * for {@link PropertyAccess}es after the execution of this method.
 	 */
 	public void clear() {
@@ -351,6 +362,6 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 		passiveReaders.clear();
 		activeWriters.clear();
 		passiveWriters.clear();
-		ids.clear();
+		keys.clear();
 	}
 }
