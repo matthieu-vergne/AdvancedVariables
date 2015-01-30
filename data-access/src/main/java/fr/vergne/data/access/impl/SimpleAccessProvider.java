@@ -108,7 +108,6 @@ public class SimpleAccessProvider implements PropertyAccessProvider {
 	 * @deprecated Prefer to use {@link #getKeys()}. Will be deleted in future
 	 *             versions.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated
 	@Override
 	public Collection<Object> getIDs() {
