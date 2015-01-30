@@ -18,8 +18,8 @@ import fr.vergne.data.access.PassiveWriteAccess;
  * 
  * @param <Value>
  */
-public class FlowController<Value> extends SimplePassiveWriteAccess<Value> implements PassiveWriteAccess<Value>,
-		PassiveReadAccess<Value> {
+public class FlowController<Value> extends SimplePassiveWriteAccess<Value>
+		implements PassiveWriteAccess<Value>, PassiveReadAccess<Value> {
 
 	private final Collection<ValueListener<Value>> readers = new HashSet<ValueListener<Value>>();
 
@@ -50,7 +50,7 @@ public class FlowController<Value> extends SimplePassiveWriteAccess<Value> imple
 	public void addValueListener(ValueListener<Value> listener) {
 		readers.add(listener);
 	}
-	
+
 	@Override
 	public Collection<ValueListener<Value>> getValueListeners() {
 		return readers;

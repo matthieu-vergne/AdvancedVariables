@@ -16,7 +16,7 @@ import fr.vergne.data.access.PassiveReadAccess;
  * @param <Value>
  */
 public class SimplePassiveReadAccess<Value> implements PassiveReadAccess<Value> {
-	
+
 	private final Collection<ValueListener<Value>> listeners = new HashSet<ValueListener<Value>>();
 
 	@Override
