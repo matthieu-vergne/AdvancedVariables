@@ -44,7 +44,7 @@ public class SimplePassiveReadAccess<Value> implements PassiveReadAccess<Value> 
 	 * @param value
 	 *            the value to send to the listeners
 	 */
-	public void notifyListeners(Value value) {
+	public void notifyValueListeners(Value value) {
 		for (ValueListener<Value> listener : listeners) {
 			listener.valueGenerated(value);
 		}

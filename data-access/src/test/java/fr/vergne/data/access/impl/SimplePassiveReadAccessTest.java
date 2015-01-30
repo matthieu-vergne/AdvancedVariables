@@ -86,17 +86,17 @@ public class SimplePassiveReadAccessTest {
 		container[1] = null;
 		container[2] = null;
 		
-		access.notifyListeners(3);
+		access.notifyValueListeners(3);
 		assertEquals(3, (Object) container[0]);
 		assertEquals(3, (Object) container[1]);
 		assertEquals(3, (Object) container[2]);
 		
-		access.notifyListeners(-45);
+		access.notifyValueListeners(-45);
 		assertEquals(-45, (Object) container[0]);
 		assertEquals(-45, (Object) container[1]);
 		assertEquals(-45, (Object) container[2]);
 		
-		access.notifyListeners(null);
+		access.notifyValueListeners(null);
 		assertEquals(null, (Object) container[0]);
 		assertEquals(null, (Object) container[1]);
 		assertEquals(null, (Object) container[2]);
