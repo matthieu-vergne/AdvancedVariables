@@ -19,6 +19,7 @@ import fr.vergne.data.access.ActiveReadAccess;
  * 
  * @param <Value>
  */
+// TODO put in a deeper package "advanced" (tests too)
 public class CheckableFlowController<Value> extends FlowController<Value>
 		implements ActiveReadAccess<Value> {
 

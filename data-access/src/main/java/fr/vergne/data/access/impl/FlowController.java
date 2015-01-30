@@ -18,6 +18,7 @@ import fr.vergne.data.access.PassiveWriteAccess;
  * 
  * @param <Value>
  */
+// TODO put in a deeper package "advanced" (tests too)
 public class FlowController<Value> extends SimplePassiveWriteAccess<Value>
 		implements PassiveWriteAccess<Value>, PassiveReadAccess<Value> {
 

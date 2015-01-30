@@ -17,6 +17,7 @@ import fr.vergne.data.access.PassiveWriteAccess.ValueGenerator;
  * 
  * @param <Value>
  */
+// TODO put in a deeper package "advanced" (tests too)
 public class ReadableFlowController<Value> extends FlowController<Value>
 		implements ActiveReadAccess<Value> {
 

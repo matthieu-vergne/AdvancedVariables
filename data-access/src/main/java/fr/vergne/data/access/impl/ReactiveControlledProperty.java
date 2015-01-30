@@ -20,6 +20,7 @@ import fr.vergne.data.access.PassiveReadAccess;
  * 
  * @param <Value>
  */
+// TODO put in a deeper package "advanced" (tests too)
 public class ReactiveControlledProperty<Value> extends
 		ControlledProperty<Value> implements PassiveReadAccess<Value> {
 

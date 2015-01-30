@@ -14,6 +14,7 @@ import fr.vergne.data.access.ActiveWriteAccess;
  * 
  * @param <Value>
  */
+// TODO put in a deeper package "advanced" (tests too)
 public class ControlledProperty<Value> implements ActiveWriteAccess<Value>,
 		ActiveReadAccess<Value> {
 
