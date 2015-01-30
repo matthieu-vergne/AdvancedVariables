@@ -2,6 +2,7 @@ package fr.vergne.data.access.impl;
 
 import java.util.Collection;
 
+import fr.vergne.data.access.ActiveReadAccess;
 import fr.vergne.data.access.PassiveReadAccess;
 
 /**
@@ -9,7 +10,11 @@ import fr.vergne.data.access.PassiveReadAccess;
  * emulates a property which can be read and written. However, it adds some
  * reactivity by giving the possibility to be notified when the
  * {@link #set(Object)} method is called. To receive these notifications, one
- * has to register itself through {@link #addValueListener(ValueListener)}.
+ * has to register itself through {@link #addValueListener(ValueListener)}.<br/>
+ * <br/>
+ * If the ability to read the stored value at any time through the
+ * {@link ActiveReadAccess#get()} method is not necessary, one could prefer to
+ * use a {@link Pusher}, which is more optimized.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 

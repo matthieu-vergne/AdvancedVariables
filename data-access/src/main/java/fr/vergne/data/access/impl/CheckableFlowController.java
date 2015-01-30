@@ -9,7 +9,11 @@ import fr.vergne.data.access.ActiveReadAccess;
  * additional {@link #get()} method. The main difference with
  * {@link ReadableFlowController} is that the {@link #get()} method provide the
  * current value of the source instead of the last value transferred to the
- * targets.
+ * targets.<br/>
+ * <br/>
+ * If the ability to register a {@link ValueListener} is not necessary and only
+ * the {@link #get()} method is needed, one could prefer to use a {@link Puller}
+ * , which is more optimized.
  * 
  * @author Matthieu Vergne <matthieu.vergne@gmail.com>
  * 
