@@ -21,7 +21,7 @@ import fr.vergne.data.access.PassiveWriteAccess;
 public class FlowController<Value> extends SimplePassiveWriteAccess<Value> implements PassiveWriteAccess<Value>,
 		PassiveReadAccess<Value> {
 
-	private final Collection<ValueListener<Value>> listeners = new HashSet<ValueListener<Value>>();
+	private final Collection<ValueListener<Value>> readers = new HashSet<ValueListener<Value>>();
 
 	/**
 	 * Create a {@link FlowController} without any {@link ValueGenerator}. Such
@@ -48,17 +48,17 @@ public class FlowController<Value> extends SimplePassiveWriteAccess<Value> imple
 
 	@Override
 	public void addValueListener(ValueListener<Value> listener) {
-		listeners.add(listener);
+		readers.add(listener);
 	}
 	
 	@Override
 	public Collection<fr.vergne.data.access.PassiveReadAccess.ValueListener<Value>> getValueListeners() {
-		return listeners;
+		return readers;
 	}
 
 	@Override
 	public void removeValueListener(ValueListener<Value> listener) {
-		listeners.remove(listener);
+		readers.remove(listener);
 	}
 
 	/**
@@ -67,12 +67,12 @@ public class FlowController<Value> extends SimplePassiveWriteAccess<Value> imple
 	 * registered, nothing happen to preserve performance.
 	 */
 	public void transfer() {
-		if (listeners.isEmpty()) {
+		if (readers.isEmpty()) {
 			// no need to retrieve the value
 		} else {
 			Value value = getValueGenerator().generateValue();
-			for (ValueListener<Value> listener : listeners) {
-				listener.valueGenerated(value);
+			for (ValueListener<Value> reader : readers) {
+				reader.valueGenerated(value);
 			}
 		}
 	}
