@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import fr.vergne.data.access.ActiveReadAccess;
@@ -14,7 +13,6 @@ import fr.vergne.data.access.PassiveReadAccess;
 import fr.vergne.data.access.PassiveWriteAccess;
 import fr.vergne.data.access.PropertyAccess;
 import fr.vergne.data.access.util.AccessFactory;
-import fr.vergne.logging.LoggerConfiguration;
 
 /**
  * A {@link LastInstantComputer} aims at reducing computation time by computing
@@ -42,11 +40,8 @@ import fr.vergne.logging.LoggerConfiguration;
  */
 public class LastInstantComputer<Value> implements ActiveReadAccess<Value> {
 
-	private final static Logger logger = LoggerConfiguration.getSimpleLogger();
-	static {
-		// deactivate logging by default
-		logger.setLevel(Level.OFF);
-	}
+	private static final Logger logger = Logger
+			.getLogger(LastInstantComputer.class.getName());
 
 	/**
 	 * The sources to use to get the inputs to compute.
