@@ -16,8 +16,8 @@
 	</modules>
 
 	<scm>
-		<connection>scm:git:git://github.com/matthieu-vergne/Data-Management.git</connection>
-		<developerConnection>scm:git:git://github.com/matthieu-vergne/Data-Management.git</developerConnection>
+		<connection>scm:git:https://matthieu-vergne@github.com/matthieu-vergne/Data-Management.git</connection>
+		<developerConnection>scm:git:https://matthieu-vergne@github.com/matthieu-vergne/Data-Management.git</developerConnection>
 		<url>scm:git:git://github.com/matthieu-vergne/Data-Management.git</url>
 	</scm>
 	
